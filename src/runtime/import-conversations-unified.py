@@ -52,6 +52,7 @@ logger = logging.getLogger(__name__)
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 MAX_CHUNK_SIZE = int(os.getenv("MAX_CHUNK_SIZE", "50"))
 
+LOGS_DIR = os.getenv("LOGS_DIR", os.path.expanduser("~/.claude/projects"))
 
 class ConversationImporter:
     """Main class for importing conversations with reduced complexity."""
@@ -328,7 +329,7 @@ def main():
         projects = [project_path]
     else:
         # Import all projects
-        claude_dir = Path.home() / ".claude" / "projects"
+        claude_dir = Path(LOGS_DIR).expanduser().resolve()
         if not claude_dir.exists():
             logger.error(f"Claude projects directory not found: {claude_dir}")
             sys.exit(1)
