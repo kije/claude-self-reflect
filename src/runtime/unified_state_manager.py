@@ -368,10 +368,10 @@ class UnifiedStateManager:
         path_allowed = False
         for base in allowed_bases:
             try:
-                if base.exists():
-                    resolved.relative_to(base)
-                    path_allowed = True
-                    break
+                resolved.relative_to(base)
+                path_allowed = True
+                break
+                    
             except ValueError:
                 continue
 
